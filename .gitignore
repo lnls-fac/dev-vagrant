@@ -1,0 +1,5 @@
+*~
+.vagrant
+Vagrantfile
+hla/etc/dev_minion
+hla/salt/files/bashrc
