@@ -1,0 +1,100 @@
+lnls:
+  git.latest:
+    - name: {{ pillar['repo_base_url'] }}/lnls.git
+    - rev: {{ pillar['lnls_version'] }}
+    - target: {{ pillar['repo_base_dir'] }}/code/lnls
+    - force_reset: True
+    - user: fac
+  cmd.run:
+    - name: python3 setup.py {{ pillar['install_command'] }}
+    - cwd: {{ pillar['repo_base_dir'] }}/code/lnls
+
+mathphys:
+  git.latest:
+    - name: {{ pillar['repo_base_url'] }}/mathphys.git
+    - rev: {{ pillar['mathphys_version'] }}
+    - target: {{ pillar['repo_base_dir'] }}/code/mathphys
+    - force_reset: True
+    - user: fac
+  cmd.run:
+    - name: python3 setup.py {{ pillar['install_command'] }}
+    - cwd: {{ pillar['repo_base_dir'] }}/code/mathphys
+
+trackcpp:
+  git.latest:
+    - name: {{ pillar['repo_base_url'] }}/trackcpp.git
+    - rev: {{ pillar['trackcpp_version'] }}
+    - target: {{ pillar['repo_base_dir'] }}/code/trackcpp
+    - force_reset: True
+    - user: fac
+  cmd.run:
+    - name: make {{ pillar['install_command'] }}
+    - cwd: {{ pillar['repo_base_dir'] }}/code/trackcpp
+
+pyaccel:
+  git.latest:
+    - name: {{ pillar['repo_base_url'] }}/pyaccel.git
+    - rev: {{ pillar['pyaccel_version'] }}
+    - target: {{ pillar['repo_base_dir'] }}/code/pyaccel
+    - force_reset: True
+    - user: fac
+  cmd.run:
+    - name: python3 setup.py {{ pillar['install_command'] }}
+    - cwd: {{ pillar['repo_base_dir'] }}/code/pyaccel
+
+scripts:
+  git.latest:
+    - name: {{ pillar['repo_base_url'] }}/scripts.git
+    - rev: {{ pillar['scripts_version'] }}
+    - target: {{ pillar['repo_base_dir'] }}/code/scripts
+    - force_reset: True
+    - user: fac
+  cmd.run:
+    - name: cd bin && make {{ pillar['install_command'] }} && cd ../etc && make {{ pillar['install_command'] }} && cd ../experiments && make {{ pillar['install_command'] }}
+    - cwd: {{ pillar['repo_base_dir'] }}/code/scripts
+
+sirius:
+  git.latest:
+    - name: {{ pillar['repo_base_url'] }}/sirius.git
+    - rev: {{ pillar['sirius_version'] }}
+    - target: {{ pillar['repo_base_dir'] }}/code/sirius
+    - force_reset: True
+    - user: fac
+  cmd.run:
+    - name: python3 setup.py {{ pillar['install_command'] }}
+    - cwd: {{ pillar['repo_base_dir'] }}/code/sirius
+
+hla:
+  git.latest:
+    - name: {{ pillar['repo_base_url'] }}/hla.git
+    - rev: {{ pillar['hla_version'] }}
+    - target: {{ pillar['repo_base_dir'] }}/hla
+    - force_reset: True
+    - user: fac
+  cmd.run:
+    - name: python3 setup.py {{ pillar['install_command'] }}
+    - cwd: {{ pillar['repo_base_dir'] }}/hla/hlaplot
+
+va:
+  git.latest:
+    - name: {{ pillar['repo_base_url'] }}/va.git
+    - rev: {{ pillar['va_version'] }}
+    - target: {{ pillar['repo_base_dir'] }}/code/va
+    - force_reset: True
+    - user: fac
+  cmd.run:
+    - name: python3 setup.py {{ pillar['install_command'] }}
+    - cwd: {{ pillar['repo_base_dir'] }}/code/va
+
+siriusdb:
+  git.latest:
+    - name: {{ pillar['repo_base_url'] }}/siriusdb.git
+    - target: {{ pillar['repo_base_dir'] }}/siriusdb
+    - force_reset: True
+    - user: fac
+
+build viocs:
+  cmd.run:
+    - name: bash makeall.sh
+    - cwd: {{ pillar['repo_base_dir'] }}/code/va/viocs
+    - user: fac

@@ -1,0 +1,73 @@
+dev-vagrant
+===========
+
+ Vagrant+SaltStack environment for lnls-fac software development
+
+
+Dependencies
+------------
+
+ This repository contains files for setting up an environment for development
+ of lnls-fac software. To use it, you need to have Vagrant
+ (https://www.vagrantup.com/) and VirtualBox (https://www.virtualbox.org/)
+ installed. In case you do not have them installed, download and follow the
+ instructions from the links.
+
+
+Configuration
+-------------
+
+ Before running Vagrant, run replace_ip.py passing as an argument the component
+ of the IP address to be substituted in 192.168.<ip_component>.20. When using a
+ shared computer, ensure that the component is not already being used by other
+ virtual machines. If the computer is not shared, use any valid number, such as
+ 50:
+
+     ./replace_ip.py <ip_component>
+
+
+Choosing the lnls-fac package versions
+--------------------------------------
+
+ The versions of the lnls-fac packages to be used are set in the file
+ hla/pillar/versions.sls. To use different versions, simply change the values
+ to other valid repository release tags.
+
+
+Usage
+-----
+
+ To set up the environment, download or clone this repository with
+
+     git clone https://github.com/lnls-fac/dev-vagrant.git
+
+ Then cd into the directory with
+
+     cd dev-vagrant
+
+ and issue
+
+     vagrant up
+
+ On the first run, it may take long for the virtual machine to be set up.
+ After the machine has been started, ssh into dev with
+
+     vagrant ssh
+
+ and apply the state by issuing
+
+     sudo salt '*' state.apply
+
+ It may also take long the first time the state is applied, as many packages
+ need to be downloaded and installed. The virtual machine needs rebooting after
+ the first state application.
+
+ To ssh as user fac, use (the default fac user password is 'fac123'; remember
+ to change it on first login):
+
+     vagrant ssh -- -l fac -X
+
+ To change the repository versions, set values in hla/salt/pillar/versions.sls
+ and apply the states with
+
+     sudo salt '*' state.apply repos.dev

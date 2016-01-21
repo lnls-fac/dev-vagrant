@@ -1,0 +1,40 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.define :dev do |dev_config|
+    dev_config.vm.box = "ubuntu/trusty64"
+    dev_config.vm.box_version = "= 20151218.0.0"
+    dev_config.vm.host_name = 'saltmaster.local'
+    dev_config.vm.network "private_network", ip: "192.168.<replace_ip>.20"
+    dev_config.vm.synced_folder "hla/salt/", "/srv/salt"
+    dev_config.vm.synced_folder "hla/pillar/", "/srv/pillar"
+
+    dev_config.vm.provider "virtualbox" do |v|
+        v.cpus = 2
+        v.memory = 2048
+    end
+
+    dev_config.vm.provision :salt do |salt|
+      salt.master_config = "hla/etc/dev_master"
+      salt.master_key = "hla/keys/dev.pem"
+      salt.master_pub = "hla/keys/dev.pub"
+      salt.minion_config = "hla/etc/dev_minion"
+      salt.minion_key = "hla/keys/dev.pem"
+      salt.minion_pub = "hla/keys/dev.pub"
+      salt.seed_master = {
+                          "dev" => "hla/keys/dev.pub",
+                         }
+
+      salt.install_type = "stable"
+      salt.install_master = true
+      salt.verbose = true
+      salt.colorize = true
+      salt.bootstrap_options = "-P -c /tmp"
+    end
+  end
+
+end
