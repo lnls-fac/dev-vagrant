@@ -30,7 +30,7 @@ Choosing the lnls-fac package versions
 --------------------------------------
 
  The versions of the lnls-fac packages to be used are set in the file
- hla/pillar/versions.sls. To use different versions, simply change the values
+ dev/pillar/versions.sls. To use different versions, simply change the values
  to other valid repository release tags.
 
 
@@ -67,7 +67,7 @@ Usage
 
      vagrant ssh -- -l fac -X
 
- To change the repository versions, set values in hla/salt/pillar/versions.sls
+ To change the repository versions, set values in dev/salt/pillar/versions.sls
  and apply the states with
 
      sudo salt '*' state.apply repos.dev

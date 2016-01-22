@@ -29,5 +29,5 @@ if __name__ == '__main__':
     search = '<replace_ip>'
 
     replace_file_with_ip_component('Vagrantfile', ip_component)
-    replace_file_with_ip_component('hla/etc/dev_minion', ip_component)
-    replace_file_with_ip_component('hla/salt/files/bashrc', ip_component)
+    replace_file_with_ip_component('dev/etc/dev_minion', ip_component)
+    replace_file_with_ip_component('dev/salt/files/bashrc', ip_component)

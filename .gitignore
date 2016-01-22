@@ -2,5 +2,5 @@
 .vagrant
 Vagrantfile
 !templates/Vagrantfile
-hla/etc/dev_minion
-hla/salt/files/bashrc
+dev/etc/dev_minion
+dev/salt/files/bashrc
