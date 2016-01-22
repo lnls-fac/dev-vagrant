@@ -30,8 +30,8 @@ Choosing the lnls-fac package versions
 --------------------------------------
 
  The versions of the lnls-fac packages to be used are set in the file
- dev/pillar/versions.sls. To use different versions, simply change the values
- to other valid repository release tags.
+ vm/pillar/versions.sls. To use different versions, simply change the values to
+ other valid repository release tags.
 
 
 Usage
