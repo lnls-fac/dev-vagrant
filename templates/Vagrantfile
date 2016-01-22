@@ -10,8 +10,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     dev_config.vm.box_version = "= 20151218.0.0"
     dev_config.vm.host_name = 'dev.local'
     dev_config.vm.network "private_network", ip: "192.168.<replace_ip>.20"
-    dev_config.vm.synced_folder "hla/salt/", "/srv/salt"
-    dev_config.vm.synced_folder "hla/pillar/", "/srv/pillar"
+    dev_config.vm.synced_folder "vm/salt/", "/srv/salt"
+    dev_config.vm.synced_folder "vm/pillar/", "/srv/pillar"
 
     dev_config.vm.provider "virtualbox" do |v|
         v.cpus = 2
@@ -19,14 +19,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     dev_config.vm.provision :salt do |salt|
-      salt.master_config = "hla/etc/dev_master"
-      salt.master_key = "hla/keys/dev.pem"
-      salt.master_pub = "hla/keys/dev.pub"
-      salt.minion_config = "hla/etc/dev_minion"
-      salt.minion_key = "hla/keys/dev.pem"
-      salt.minion_pub = "hla/keys/dev.pub"
+      salt.master_config = "vm/etc/dev_master"
+      salt.master_key = "vm/keys/dev.pem"
+      salt.master_pub = "vm/keys/dev.pub"
+      salt.minion_config = "vm/etc/dev_minion"
+      salt.minion_key = "vm/keys/dev.pem"
+      salt.minion_pub = "vm/keys/dev.pub"
       salt.seed_master = {
-                          "dev" => "hla/keys/dev.pub",
+                          "dev" => "vm/keys/dev.pub",
                          }
 
       salt.install_type = "stable"
